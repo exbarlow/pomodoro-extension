@@ -14,6 +14,8 @@ let timer = {
     }
 }
 
+// need to make it so that on open of popup, gets the endTime then run the timer from the popup
+
 let interval;
 
 // get control buttons
@@ -31,9 +33,7 @@ function getRemainingTime() {
     let endTime;
     chrome.storage.local.get('timerEnd', function (result) {
         endTime = result.timerEnd;
-        alert(endTime);
         const difference = endTime - Date.now();
-        // alert(difference)
         const total = Math.floor(difference / 1000);
         const minutes = Math.floor((total / 60) % 60); // I think the modulo can probably be removed once
         const seconds = Math.floor(total % 60);
@@ -59,17 +59,24 @@ function startTimer() {
 
 function runTimer() {
     interval = window.setInterval(() => {
-        total = timer.remainingTime.total;
+        if (timer.remainingTime) {
+            total = timer.remainingTime.total;
+        }
         if (total <= 0) {
             window.clearInterval(interval);
         }
         timer.remainingTime = getRemainingTime();
-        updateCountdownText(timer.remainingTime);
+        alert(timer.remainingTime);
+        if (timer.remainingTime) {
+            updateCountdownText(timer.remainingTime);
+        }
     }, 1000);
 }
 
 // actually updates the time on the countdown timer
 function updateCountdownText(rT) {
+
+
 
     const remainingTime = rT
     const minutes = `${remainingTime.minutes}`.padStart(2, '0');
@@ -77,6 +84,7 @@ function updateCountdownText(rT) {
 
     const newText = minutes + ":" + seconds;
     countdownDisplay.innerText = newText;
+
 }
 
 startButton.addEventListener('click', () => {

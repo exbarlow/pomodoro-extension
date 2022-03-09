@@ -2,10 +2,16 @@
     "name": "Pomodoro prototype",
     "description": "Basic pomodoro timer with adjustable lengths (and music integration soon!)",
     "version": "1.0",
-    "manifest_version": 3,
+    "manifest_version": 2,
     "permissions": [
         "storage"
     ],
+    "background": {
+        "persistent": true,
+        "scripts": [
+            "background.js"
+        ]
+    },
     "action": {
         "default_popup": "popup.html"
     }
