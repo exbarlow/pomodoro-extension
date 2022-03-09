@@ -1,0 +1,22 @@
+#startButton {
+    background-color: burlywood;
+
+}
+
+button.controlButton {
+    display: inline-block;
+    background-color: aquamarine;
+    width: 60px;
+    height: 30px;
+    margin: 2px;
+    text-align: center;
+    cursor:pointer;
+}
+
+div.controlButtonDiv {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    background-color:blueviolet;
+}
